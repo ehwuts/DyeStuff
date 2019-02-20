@@ -1,4 +1,4 @@
-package net.fabricmc.example;
+package yeoldesoupe.dyestuff;
 
 import net.fabricmc.api.ModInitializer;
 
