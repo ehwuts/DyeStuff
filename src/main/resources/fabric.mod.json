@@ -1,0 +1,17 @@
+{
+  "id": "dyestuff",
+  "name": "Dye Stuff",
+  "description": "Look at your boring white bed. Now look at me. Now look at your bed. It's purple now. Now back to me. Now look at your bed again, that's not even a vanilla color.",
+  "version": "${version}",
+  "side": "universal",
+  "initializers": [
+    "yeoldesoupe.dyestuff.DyeStuff"
+  ],
+  "requires": {
+    "fabric": "*"
+  },
+  "mixins": {
+    "client": "dyestuff.client.json",
+    "common": "dyestuff.common.json"
+  }
+}
