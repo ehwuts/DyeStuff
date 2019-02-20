@@ -47,6 +47,11 @@ public class WeightedDye extends Item {
 	public static WeightedDyeColor getWeightedDyeColor(ItemStack stack) {
 		return new WeightedDyeColor(getColor(stack), getColorWeight(stack));
 	}
+	
+	public static void setColor(ItemStack stack, WeightedDyeColor weightedDyeColor) {
+		CompoundUtils.setLong(stack, DYE_COLOR, (long)weightedDyeColor.getColor());
+		CompoundUtils.setLong(stack, DYE_WEIGHT, (long)weightedDyeColor.getWeight());
+	}
 
 	@Override
     @Environment(EnvType.CLIENT)
