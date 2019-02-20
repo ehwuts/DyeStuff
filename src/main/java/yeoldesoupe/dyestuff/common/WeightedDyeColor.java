@@ -7,7 +7,7 @@ import java.lang.Integer.MAX_VALUE;
 public class WeightedDyeColor {
 	private color = 0xFFFFFF;
 	private weight = 0;
-	
+
 	public WeightedDyeColor (int color) {
 		this.color = color;
 		this.weight = 1;
@@ -28,7 +28,7 @@ public class WeightedDyeColor {
 	public WeightedDyeColor () {
 		this(DyeColor.GRAY);
 	}
-	
+
 	public float[] getColorComponents() {
 		float red = ((float)((color & 0xFF0000) >> 16)) / 255.0;
 		float green = ((float)((color & 0x00FF00) >> 8)) / 255.0;
@@ -38,11 +38,11 @@ public class WeightedDyeColor {
 	public int getColor() {
 		return this.color;
 	}
-	
+
 	public int getWeight() {
 		return this.weight;
 	}
-	
+
 	public void setColor(int color) {
 		this.color = color;
 		this.weight = 1;
@@ -60,7 +60,7 @@ public class WeightedDyeColor {
 		this.color = copy.getColor();
 		this.weight = 1;
 	}
-	
+
 	public void addColor(float[] colorComponents, int weight) {
 		float[] colorComponentsOld = this.getColorComponents();
 		int weight_old = this.weight;
@@ -68,11 +68,11 @@ public class WeightedDyeColor {
 		weighted_old[0] *= this.weight;
 		weighted_old[1] *= this.weight;
 		weighted_old[2] *= this.weight;
-		
+
 		float red_new = colorComponentsOld[0] * weight_old + colorComponents[0] * weight;
 		float green_new = colorComponentsOld[1] * weight_old + colorComponents[1] * weight;
 		float blue_new = colorComponentsOld[2] * weight_old + colorComponents[2] * weight;
-		
+
 		this.setColor([red_new / weight_new, green_new / weight_new, blue_new / weight_new]);
 		this.weight = new_weight;
 	}
@@ -91,20 +91,20 @@ public class WeightedDyeColor {
 	public void addColor(WeightedDyeColor weightedDyeColor, int weight) {
 		this.addColor(weightedDyeColor.getColorComponents(), weight);
 	}
-	
-    public void addColor(int color) {
+
+	public void addColor(int color) {
 		this.addColor(color, 1);
 	}
-    public void addColor(float[] colorComponents) {
+	public void addColor(float[] colorComponents) {
 		this.addColor(colorComponents, 1);
 	}
-    public void addColor(DyeColor dyeColor) {
+	public void addColor(DyeColor dyeColor) {
 		this.addColor(dyeColor, 1);
 	}
-    public void addColor(DyeItem dyeItem) {
+	public void addColor(DyeItem dyeItem) {
 		this.addColor(dyeItem, 1);
 	}
-    public void addColor(WeightedDyeColor weightedDyeColor) {
+	public void addColor(WeightedDyeColor weightedDyeColor) {
 		this.addColor(weightedDyeColor, 1);
 	}
 }
