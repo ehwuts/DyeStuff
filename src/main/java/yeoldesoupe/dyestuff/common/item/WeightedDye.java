@@ -27,12 +27,7 @@ public class WeightedDye extends Item {
 	public static class ColorHandler implements ItemColorMapper {
 		@Override
 		public int getColor(ItemStack stack, int layer) {
-			switch (layer) {
-				case 1:
-					return WeightedDye.getColor(stack);
-				default:
-					return -1;
-			}
+			return WeightedDye.getColor(stack);
 		}
 	}
 	

@@ -47,7 +47,7 @@ public class WeightedDyeWeighting extends SpecialCraftingRecipe {
 	
 	@Override
 	public ItemStack craft(CraftingInventory craftingInventory) {
-		WeightedDyeColor result = new WeightedDyeColor();
+		WeightedDyeColor result = new WeightedDyeColor(0, 0);
 		ItemStack target = ItemStack.EMPTY;
 		
 		for(int i = 0; i < craftingInventory.getInvSize(); ++i) {
@@ -60,7 +60,7 @@ public class WeightedDyeWeighting extends SpecialCraftingRecipe {
 					result.addColor(((WeightedDye)here.getItem()).getWeightedDyeColor(here));
 					target = here.copy();
 				} else if (here.getItem() instanceof DyeItem) {
-					result.addColor((DyeItem)here.getItem());
+					result.addColor((DyeItem)here.getItem(), 1);
 				} else {
 					return ItemStack.EMPTY;
 				}
