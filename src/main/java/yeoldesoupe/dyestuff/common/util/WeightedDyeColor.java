@@ -1,8 +1,9 @@
-package yeoldesoupe.dyestuff.common;
+package yeoldesoupe.dyestuff.common.util;
 
+import yeoldesoupe.dyestuff.common.util.ColorUtil;
+import java.lang.Integer;
 import net.minecraft.item.DyeItem;
 import net.minecraft.util.DyeColor;
-import java.lang.Integer;
 
 public class WeightedDyeColor {
 	private int color = 0xFFFFFF;
@@ -17,7 +18,7 @@ public class WeightedDyeColor {
 		this.weight = copy.getWeight();
 	}
 	public WeightedDyeColor(float[] colorComponents) {
-		this((((int)(colorComponents[0] * 255.0F)) << 16) + (((int)(colorComponents[1] * 255.0F)) << 8) + ((int)(colorComponents[2] * 255.0F)));
+		this(ColorUtil.floatComponentsToHex(colorComponents));
 	}
 	public WeightedDyeColor (DyeColor dyeColor) {
 		this(dyeColor.getColorComponents());
@@ -30,12 +31,7 @@ public class WeightedDyeColor {
 	}
 
 	public float[] getColorComponents() {
-		float red = ((float)((color & 0xFF0000) >> 16)) / 255.0F;
-		float green = ((float)((color & 0x00FF00) >> 8)) / 255.0F;
-		float blue = ((float)((color & 0xFF0000) >> 0)) / 255.0F;
-		
-		float[] colorComponents = {red, green, blue};
-		return colorComponents;
+		return ColorUtil.hexToFloatComponents(this.color);
 	}
 	public int getColor() {
 		return this.color;
@@ -50,10 +46,7 @@ public class WeightedDyeColor {
 		this.weight = 1;
 	}
 	public void setColor(float[] colorComponents) {
-		int red = (((int)(colorComponents[0] * 255.0F)) << 16) & 0xFF0000;
-		int green = (((int)(colorComponents[1] * 255.0F)) << 8) & 0x00FF00;
-		int blue = ((int)(colorComponents[2] * 255.0F)) & 0x0000FF;
-		this.setColor(red + green + blue);
+		this.setColor(ColorUtil.floatComponentsToHex(colorComponents));
 	}
 	public void setColor(DyeColor dyeColor) {
 		this.setColor(dyeColor.getColorComponents());
@@ -81,12 +74,7 @@ public class WeightedDyeColor {
 		this.weight = weight_new;
 	}
 	public void addColor(int color, int weight) {
-		float red = ((float)((color & 0xFF0000) >> 16)) / 255.0F;
-		float green = ((float)((color & 0x00FF00) >> 8)) / 255.0F;
-		float blue = ((float)((color & 0xFF0000) >> 0)) / 255.0F;
-		
-		float[] colorComponents = {red, green, blue};
-		this.addColor(colorComponents, weight);
+		this.addColor(ColorUtil.hexToFloatComponents(color), weight);
 	}
 	public void addColor(DyeColor dyeColor, int weight) {
 		this.addColor(dyeColor.getColorComponents(), weight);
