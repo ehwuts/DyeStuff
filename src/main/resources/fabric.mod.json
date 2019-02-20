@@ -5,7 +5,8 @@
   "version": "${version}",
   "side": "universal",
   "initializers": [
-    "yeoldesoupe.dyestuff.DyeStuff"
+    "yeoldesoupe.dyestuff.DyeStuff",
+    "yeoldesoupe.dyestuff.DyeStuffClient"
   ],
   "requires": {
     "fabric": "*"
