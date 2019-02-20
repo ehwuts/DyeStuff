@@ -57,7 +57,7 @@ public class WeightedDyeColor {
 		this.weight_v = weight;
 	}
 	public void setColor(int color) {
-		this.setColor(weight, 1);
+		this.setColor(color, 1);
 	}
 	public void setColor(float[] colorComponents, int weight) {
 		this.setColor(ColorUtil.floatComponentsToHex(colorComponents), weight);
