@@ -34,9 +34,9 @@ public class ColorUtil {
 	}
 	
 	public static int floatComponentsToHex(float[] colorComponents) {
-		return floatToHexRed(colorComponents[0]) + floatToHexGreen(colorComponents[1]) + floatToHexGreen(colorComponents[2]);
+		return floatToHexRed(colorComponents[0]) + floatToHexGreen(colorComponents[1]) + floatToHexBlue(colorComponents[2]);
 	}
 	public static int floatComponentsToHex(float red, float green, float blue) {
-		return floatToHexRed(red) + floatToHexGreen(green) + floatToHexGreen(blue);
+		return floatToHexRed(red) + floatToHexGreen(green) + floatToHexBlue(blue);
 	}
 }
