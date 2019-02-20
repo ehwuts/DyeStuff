@@ -26,7 +26,7 @@ public class WeightedDyeColor {
 		this(dyeItem.getColor());
 	}
 	public WeightedDyeColor () {
-		this(DyeColor.GRAY);
+		//just default to weightless white?
 	}
 
 	public float[] getColorComponents() {
