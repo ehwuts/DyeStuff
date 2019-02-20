@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "dyestuff:weighted_dye",
+	"count": 1
+  },
+  "pattern": [
+    " # ",
+    "#W#",
+    " # "
+  ],
+  "type": "crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:clay_ball"
+    },
+    "W": {
+      "item": "minecraft:white_dye"
+    }
+  }
+}
