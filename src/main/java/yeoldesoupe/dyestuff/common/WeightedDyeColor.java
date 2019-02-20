@@ -2,11 +2,11 @@ package yeoldesoupe.dyestuff.common;
 
 import net.minecraft.item.DyeItem;
 import net.minecraft.util.DyeColor;
-import java.lang.Integer.MAX_VALUE;
+import java.lang.Integer;
 
 public class WeightedDyeColor {
-	private color = 0xFFFFFF;
-	private weight = 0;
+	private int color = 0xFFFFFF;
+	private int weight = 0;
 
 	public WeightedDyeColor (int color) {
 		this.color = color;
@@ -30,10 +30,12 @@ public class WeightedDyeColor {
 	}
 
 	public float[] getColorComponents() {
-		float red = ((float)((color & 0xFF0000) >> 16)) / 255.0;
-		float green = ((float)((color & 0x00FF00) >> 8)) / 255.0;
-		float blue = ((float)((color & 0xFF0000) >> 0)) / 255.0;
-		return [red, green, blue];
+		float red = ((float)((color & 0xFF0000) >> 16)) / 255.0F;
+		float green = ((float)((color & 0x00FF00) >> 8)) / 255.0F;
+		float blue = ((float)((color & 0xFF0000) >> 0)) / 255.0F;
+		
+		float[] colorComponents = {red, green, blue};
+		return colorComponents;
 	}
 	public int getColor() {
 		return this.color;
@@ -48,7 +50,10 @@ public class WeightedDyeColor {
 		this.weight = 1;
 	}
 	public void setColor(float[] colorComponents) {
-		this.setColor((((int)(colorComponents[0] * 255.0F)) << 16) + (((int)(colorComponents[1] * 255.0F)) << 8) + ((int)(colorComponents[2] * 255.0F)));
+		int red = (((int)(colorComponents[0] * 255.0F)) << 16) & 0xFF0000;
+		int green = (((int)(colorComponents[1] * 255.0F)) << 8) & 0x00FF00;
+		int blue = ((int)(colorComponents[2] * 255.0F)) & 0x0000FF;
+		this.setColor(red + green + blue);
 	}
 	public void setColor(DyeColor dyeColor) {
 		this.setColor(dyeColor.getColorComponents());
@@ -57,30 +62,31 @@ public class WeightedDyeColor {
 		this.setColor(dyeItem.getColor());
 	}
 	public void setColor(WeightedDyeColor weightedDyeColor) {
-		this.color = copy.getColor();
+		this.color = weightedDyeColor.getColor();
 		this.weight = 1;
 	}
 
 	public void addColor(float[] colorComponents, int weight) {
 		float[] colorComponentsOld = this.getColorComponents();
 		int weight_old = this.weight;
-		int weight_new = (MAX_VALUE - this.weight >= weight) ? this.weight + weight : MAX_VALUE;
-		weighted_old[0] *= this.weight;
-		weighted_old[1] *= this.weight;
-		weighted_old[2] *= this.weight;
+		int weight_new = (Integer.MAX_VALUE - this.weight >= weight) ? this.weight + weight : Integer.MAX_VALUE;
 
-		float red_new = colorComponentsOld[0] * weight_old + colorComponents[0] * weight;
-		float green_new = colorComponentsOld[1] * weight_old + colorComponents[1] * weight;
-		float blue_new = colorComponentsOld[2] * weight_old + colorComponents[2] * weight;
-
-		this.setColor([red_new / weight_new, green_new / weight_new, blue_new / weight_new]);
-		this.weight = new_weight;
+		float red_new = (colorComponentsOld[0] * weight_old + colorComponents[0] * weight) / weight_new;
+		float green_new = (colorComponentsOld[1] * weight_old + colorComponents[1] * weight) / weight_new;
+		float blue_new = (colorComponentsOld[2] * weight_old + colorComponents[2] * weight) / weight_new;
+		
+		float[] colorComponents_new = {red_new , green_new, blue_new};
+		
+		this.setColor(colorComponents_new);
+		this.weight = weight_new;
 	}
 	public void addColor(int color, int weight) {
-		float red = ((float)((color & 0xFF0000) >> 16)) / 255.0;
-		float green = ((float)((color & 0x00FF00) >> 8)) / 255.0;
-		float blue = ((float)((color & 0xFF0000) >> 0)) / 255.0;
-		this.addColor([red, green, blue], weight);
+		float red = ((float)((color & 0xFF0000) >> 16)) / 255.0F;
+		float green = ((float)((color & 0x00FF00) >> 8)) / 255.0F;
+		float blue = ((float)((color & 0xFF0000) >> 0)) / 255.0F;
+		
+		float[] colorComponents = {red, green, blue};
+		this.addColor(colorComponents, weight);
 	}
 	public void addColor(DyeColor dyeColor, int weight) {
 		this.addColor(dyeColor.getColorComponents(), weight);
