@@ -1,18 +1,40 @@
 {
+  "schemaVersion": 1,
   "id": "dyestuff",
+  "version": "${version}",
+
   "name": "Dye Stuff",
   "description": "Look at your boring white bed. Now look at me. Now look at your bed. It's purple now. Now back to me. Now look at your bed again, that's not even a vanilla color.",
-  "version": "${version}",
-  "side": "universal",
-  "initializers": [
-    "yeoldesoupe.dyestuff.DyeStuff",
-    "yeoldesoupe.dyestuff.DyeStuffClient"
+  "authors": [
+    "yeoldesoupe"
   ],
-  "requires": {
-    "fabric": "*"
+  "contact": {
+    "homepage": "https://github.com/ehwuts/DyeStuff",
+    "sources": "https://github.com/ehwuts/DyeStuff"
   },
-  "mixins": {
-    "client": "dyestuff.client.json",
-    "common": "dyestuff.common.json"
+
+  "license": "MIT",
+  "icon": "assets/dyestuff/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+	"main": [
+		"yeoldesoupe.dyestuff.DyeStuff"
+    ],
+	"client": [
+		"yeoldesoupe.dyestuff.DyeStuffClient"		
+	]
+  },
+  "mixins": [
+    "common": "dyestuff.common.json",
+   {
+      "config": "dyestuff.client.json",
+      "environment": "client"
+   }
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
   }
 }
