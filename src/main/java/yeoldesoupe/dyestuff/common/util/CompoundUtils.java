@@ -65,7 +65,7 @@ public class CompoundUtils {
         return verifyExistence(stack, tag) ? getCompoundTag(stack).getLong(tag) : defaultExpected;
     }
 
-    public static long getDouble(ItemStack stack, String tag, double defaultExpected) {
+    public static double getDouble(ItemStack stack, String tag, double defaultExpected) {
 
         return verifyExistence(stack, tag) ? getCompoundTag(stack).getDouble(tag) : defaultExpected;
     }
