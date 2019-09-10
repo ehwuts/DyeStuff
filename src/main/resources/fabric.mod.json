@@ -22,11 +22,11 @@
 		"yeoldesoupe.dyestuff.DyeStuff"
     ],
 	"client": [
-		"yeoldesoupe.dyestuff.DyeStuffClient"		
+		"yeoldesoupe.dyestuff.DyeStuffClient"
 	]
   },
   "mixins": [
-    "common": "dyestuff.common.json",
+    "dyestuff.common.json",
    {
       "config": "dyestuff.client.json",
       "environment": "client"
