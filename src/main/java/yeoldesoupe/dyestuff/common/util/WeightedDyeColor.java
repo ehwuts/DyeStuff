@@ -5,6 +5,7 @@ import java.lang.Integer;
 import net.minecraft.item.DyeItem;
 import net.minecraft.util.DyeColor;
 
+// TODO: clean this up into a tidy temp-use buffer
 public class WeightedDyeColor {
 	private int color_v = 0xFFFFFF;
 	private int weight_v = 0;
