@@ -30,9 +30,12 @@ public class NBTUtil {
     }
 
     // SETTERS //
+    public static void setInt(ItemStack stack, String tag, int l) {
+        getCompoundTag(stack).putInt(tag, l);
+    }
     public static void setLong(ItemStack stack, String tag, long l) {
         getCompoundTag(stack).putLong(tag, l);
-    }	
+    }
     public static void setDouble(ItemStack stack, String tag, double d) {
         getCompoundTag(stack).putDouble(tag, d);
     }
@@ -45,6 +48,9 @@ public class NBTUtil {
     // GETTERS //
     public static boolean verifyExistence(ItemStack stack, String tag) {
         return !stack.isEmpty() && getCompoundTag(stack).containsKey(tag);
+    }
+    public static int getInt(ItemStack stack, String tag, int defaultExpected) {
+        return verifyExistence(stack, tag) ? getCompoundTag(stack).getInt(tag) : defaultExpected;
     }
     public static long getLong(ItemStack stack, String tag, long defaultExpected) {
         return verifyExistence(stack, tag) ? getCompoundTag(stack).getLong(tag) : defaultExpected;

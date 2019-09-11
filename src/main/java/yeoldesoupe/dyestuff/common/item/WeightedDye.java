@@ -32,11 +32,11 @@ public class WeightedDye extends Item {
 	}
 	
 	public static int getColor(ItemStack stack) {
-		return (int)NBTUtil.getLong(stack, DYE_COLOR, 0xFFFFFF);
+		return (int)NBTUtil.getInt(stack, DYE_COLOR, 0xFFFFFF);
 	}
 	
 	public static int getColorWeight(ItemStack stack) {
-		return (int)NBTUtil.getLong(stack, DYE_WEIGHT, 0);
+		return (int)NBTUtil.getInt(stack, DYE_WEIGHT, 0);
 	}
 	
 	public static WeightedDyeColor getWeightedDyeColor(ItemStack stack) {
@@ -44,8 +44,8 @@ public class WeightedDye extends Item {
 	}
 	
 	public static void setColor(ItemStack stack, WeightedDyeColor weightedDyeColor) {
-		NBTUtil.setLong(stack, DYE_COLOR, (long)weightedDyeColor.getColor());
-		NBTUtil.setLong(stack, DYE_WEIGHT, (long)weightedDyeColor.getWeight());
+		NBTUtil.setInt(stack, DYE_COLOR, weightedDyeColor.getColor());
+		NBTUtil.setInt(stack, DYE_WEIGHT, weightedDyeColor.getWeight());
 	}
 
 	@Override
