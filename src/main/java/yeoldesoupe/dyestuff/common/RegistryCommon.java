@@ -2,7 +2,7 @@ package yeoldesoupe.dyestuff.common;
 
 import yeoldesoupe.dyestuff.DyeStuff;
 import yeoldesoupe.dyestuff.common.item.WeightedDye;
-import yeoldesoupe.dyestuff.recipe.WeightedDyeWeighting;
+import yeoldesoupe.dyestuff.common.recipe.WeightedDyeWeighting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.RecipeSerializer;

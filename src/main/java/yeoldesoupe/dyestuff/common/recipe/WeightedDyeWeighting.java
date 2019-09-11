@@ -1,4 +1,4 @@
-package yeoldesoupe.dyestuff.recipe;
+package yeoldesoupe.dyestuff.common.recipe;
 
 import yeoldesoupe.dyestuff.DyeStuff;
 import yeoldesoupe.dyestuff.common.RegistryCommon;
