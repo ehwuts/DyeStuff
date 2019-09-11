@@ -12,7 +12,7 @@ import net.minecraft.nbt.CompoundTag;
 /**
  * Created by bafomdad on 12/13/2018.
  */
-public class CompoundUtils {
+public class NBTUtil {
     public static boolean detectTag(ItemStack stack) {
         return stack.hasTag();
     }

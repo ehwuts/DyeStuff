@@ -1,6 +1,6 @@
 package yeoldesoupe.dyestuff.common.item;
 
-import yeoldesoupe.dyestuff.common.util.CompoundUtils;
+import yeoldesoupe.dyestuff.common.util.NBTUtil;
 import yeoldesoupe.dyestuff.common.util.WeightedDyeColor;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.color.item.ItemColorProvider;
@@ -32,11 +32,11 @@ public class WeightedDye extends Item {
 	}
 	
 	public static int getColor(ItemStack stack) {
-		return (int)CompoundUtils.getLong(stack, DYE_COLOR, 0xFFFFFF);
+		return (int)NBTUtil.getLong(stack, DYE_COLOR, 0xFFFFFF);
 	}
 	
 	public static int getColorWeight(ItemStack stack) {
-		return (int)CompoundUtils.getLong(stack, DYE_WEIGHT, 0);
+		return (int)NBTUtil.getLong(stack, DYE_WEIGHT, 0);
 	}
 	
 	public static WeightedDyeColor getWeightedDyeColor(ItemStack stack) {
@@ -44,8 +44,8 @@ public class WeightedDye extends Item {
 	}
 	
 	public static void setColor(ItemStack stack, WeightedDyeColor weightedDyeColor) {
-		CompoundUtils.setLong(stack, DYE_COLOR, (long)weightedDyeColor.getColor());
-		CompoundUtils.setLong(stack, DYE_WEIGHT, (long)weightedDyeColor.getWeight());
+		NBTUtil.setLong(stack, DYE_COLOR, (long)weightedDyeColor.getColor());
+		NBTUtil.setLong(stack, DYE_WEIGHT, (long)weightedDyeColor.getWeight());
 	}
 
 	@Override
