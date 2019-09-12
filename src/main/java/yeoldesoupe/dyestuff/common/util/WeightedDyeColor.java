@@ -4,27 +4,33 @@ import yeoldesoupe.dyestuff.common.util.ColorUtil;
 import java.lang.Integer;
 import net.minecraft.item.DyeItem;
 import net.minecraft.util.DyeColor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 
 // TODO: clean this up into a tidy temp-use buffer
 public class WeightedDyeColor {
-	private int color_v = 0xFFFFFF;
+	private static final String DYE_TAG_GROUP  = "weighted_dye_color";
+	private static final String DYE_TAG_COLOR = "color";
+	private static final String DYE_TAG_WEIGHT = "weight";
+	private float[] colors = new float[]{1.0f, 1.0f, 1.0f};
 	private int weight_v = 0;
 
 	public WeightedDyeColor () {
-		//default to the weightless white
+		//default to weightless white
+	}
+	public WeightedDyeColor(float[] colorComponents, int weight) {
+		this.colors = colorComponents;
+		this.weight_v = weight;
+	}
+	public WeightedDyeColor(float[] colorComponents) {
+		this(colorComponents, 1);
 	}
 	public WeightedDyeColor (int color, int weight) {
-		this.color_v = color;
-		this.weight_v = weight;
+		this(ColorUtil.hexToFloatComponents(color), weight);
 	}
 	public WeightedDyeColor (int color) {
 		this(color, 1);
-	}
-	public WeightedDyeColor(float[] colorComponents, int weight) {
-		this(ColorUtil.floatComponentsToHex(colorComponents), weight);
-	}
-	public WeightedDyeColor(float[] colorComponents) {
-		this(ColorUtil.floatComponentsToHex(colorComponents), 1);
 	}
 	public WeightedDyeColor (DyeColor dyeColor, int weight) {
 		this(dyeColor.getColorComponents(), weight);
@@ -39,32 +45,32 @@ public class WeightedDyeColor {
 		this(dyeItem.getColor(), 1);
 	}
 	public WeightedDyeColor (WeightedDyeColor weightedDyeColor) {
-		this(weightedDyeColor.getColor(), weightedDyeColor.getWeight());
+		this(weightedDyeColor.getColorComponents(), weightedDyeColor.getWeight());
 	}
 
 	public float[] getColorComponents() {
-		return ColorUtil.hexToFloatComponents(this.color_v);
+		return this.colors;
 	}
 	public int getColor() {
-		return this.color_v;
+		return ColorUtil.floatComponentsToHex(this.colors);
 	}
 
 	public int getWeight() {
 		return this.weight_v;
 	}
 
-	public void setColor(int color, int weight) {
-		this.color_v = color;
+	public void setColor(float[] colorComponents, int weight) {
+		this.colors = colorComponents;
 		this.weight_v = weight;
+	}
+	public void setColor(int color, int weight) {
+		this.setColor(ColorUtil.hexToFloatComponents(color) , weight);
 	}
 	public void setColor(int color) {
 		this.setColor(color, 1);
 	}
-	public void setColor(float[] colorComponents, int weight) {
-		this.setColor(ColorUtil.floatComponentsToHex(colorComponents), weight);
-	}
 	public void setColor(float[] colorComponents) {
-		this.setColor(ColorUtil.floatComponentsToHex(colorComponents), 1);
+		this.setColor(colorComponents, 1);
 	}
 	public void setColor(DyeColor dyeColor, int weight) {
 		this.setColor(dyeColor.getColorComponents(), weight);
@@ -79,10 +85,10 @@ public class WeightedDyeColor {
 		this.setColor(dyeItem.getColor(), 1);
 	}
 	public void setColor(WeightedDyeColor weightedDyeColor, int weight) {
-		this.setColor(weightedDyeColor.getColor(), weight);
+		this.setColor(weightedDyeColor.getColorComponents(), weight);
 	}
 	public void setColor(WeightedDyeColor weightedDyeColor) {
-		this.setColor(weightedDyeColor.getColor(), 1);
+		this.setColor(weightedDyeColor.getColorComponents(), 1);
 	}
 
 	public void addColor(float[] colorComponents, int weight) {
