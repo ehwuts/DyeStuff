@@ -11,6 +11,7 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.world.World;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import java.lang.Integer;
 import java.util.List;
 
 public class WeightedDye extends Item {
@@ -30,7 +31,7 @@ public class WeightedDye extends Item {
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, World world, List<Text> text, TooltipContext tooltip) {
 		WeightedDyeColor weightedDyeColor = new WeightedDyeColor(stack);
-        text.add(new LiteralText("#" + weightedDyeColor.getColor()));
+        text.add(new LiteralText("#" + Integer.toHexString(weightedDyeColor.getColor())));
 		text.add(new LiteralText("x" + weightedDyeColor.getWeight()));
     }
 }
