@@ -92,13 +92,14 @@ public class WeightedDyeColor {
 	}
 
 	public void addColor(float[] colorComponents, int weight) {
-		float[] colorComponentsOld = this.getColorComponents();
+		float[] colorComponents_old = this.getColorComponents();
 		int weight_old = this.weight_v;
 		int weight_new = (Integer.MAX_VALUE - this.weight_v >= weight) ? this.weight_v + weight : Integer.MAX_VALUE;
 
-		float red_new = (colorComponentsOld[0] * weight_old + colorComponents[0] * weight) / weight_new;
-		float green_new = (colorComponentsOld[1] * weight_old + colorComponents[1] * weight) / weight_new;
-		float blue_new = (colorComponentsOld[2] * weight_old + colorComponents[2] * weight) / weight_new;
+		// TODO: figure out appropriate handling for weird inputs
+		float red_new = weight_old == 0 ? colorComponents[0] : (colorComponents_old[0] * weight_old + colorComponents[0] * weight) / weight_new;
+		float green_new = weight_old == 0 ? colorComponents[1] : (colorComponents_old[1] * weight_old + colorComponents[1] * weight) / weight_new;
+		float blue_new = weight_old == 0 ? colorComponents[2] : (colorComponents_old[2] * weight_old + colorComponents[2] * weight) / weight_new;
 		
 		float[] colorComponents_new = {red_new , green_new, blue_new};
 		
