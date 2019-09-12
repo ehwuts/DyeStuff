@@ -57,7 +57,7 @@ public class WeightedDyeWeighting extends SpecialCraftingRecipe {
 					if (!target.isEmpty()) {
 						return ItemStack.EMPTY;
 					}
-					result.addColor(((WeightedDye)here.getItem()).getWeightedDyeColor(here));
+					result.addColor(here);
 					target = here.copy();
 				} else if (here.getItem() instanceof DyeItem) {
 					result.addColor((DyeItem)here.getItem(), 1);
@@ -71,7 +71,7 @@ public class WeightedDyeWeighting extends SpecialCraftingRecipe {
 			return ItemStack.EMPTY;
 		}
 			
-		((WeightedDye)target.getItem()).setColor(target, result);
+		result.saveTo(target);
 		return target;
 	}
 	

@@ -1,17 +1,19 @@
 package yeoldesoupe.dyestuff.common.util;
 
 import yeoldesoupe.dyestuff.common.util.ColorUtil;
+import yeoldesoupe.dyestuff.common.util.NBTUtil;
 import java.lang.Integer;
 import net.minecraft.item.DyeItem;
 import net.minecraft.util.DyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 
 // TODO: clean this up into a tidy temp-use buffer
 public class WeightedDyeColor {
 	private static final String DYE_TAG_GROUP  = "weighted_dye_color";
-	private static final String DYE_TAG_COLOR = "color";
+	private static final String DYE_TAG_COLOR_RED = "color_red";
+	private static final String DYE_TAG_COLOR_GREEN = "color_green";
+	private static final String DYE_TAG_COLOR_BLUE = "color_blue";
 	private static final String DYE_TAG_WEIGHT = "weight";
 	private float[] colors = new float[]{1.0f, 1.0f, 1.0f};
 	private int weight_v = 0;
@@ -46,6 +48,32 @@ public class WeightedDyeColor {
 	}
 	public WeightedDyeColor (WeightedDyeColor weightedDyeColor) {
 		this(weightedDyeColor.getColorComponents(), weightedDyeColor.getWeight());
+	}
+	public WeightedDyeColor (ItemStack stack) {
+		CompoundTag temp = NBTUtil.getCompound(stack, DYE_TAG_GROUP, false);
+		
+		if (temp.containsKey(DYE_TAG_COLOR_RED)) {
+			colors[0] = temp.getFloat(DYE_TAG_COLOR_RED);
+		}
+		if (temp.containsKey(DYE_TAG_COLOR_GREEN)) {
+			colors[1] = temp.getFloat(DYE_TAG_COLOR_GREEN);
+		}
+		if (temp.containsKey(DYE_TAG_COLOR_BLUE)) {
+			colors[2] = temp.getFloat(DYE_TAG_COLOR_BLUE);
+		}
+		if (temp.containsKey(DYE_TAG_WEIGHT)) {
+			this.weight_v = temp.getInt(DYE_TAG_WEIGHT);
+		}
+	}
+	
+	public void saveTo(ItemStack stack) {
+		CompoundTag temp = new CompoundTag();
+		temp.putFloat(DYE_TAG_COLOR_RED, colors[0]);
+		temp.putFloat(DYE_TAG_COLOR_GREEN, colors[1]);
+		temp.putFloat(DYE_TAG_COLOR_BLUE, colors[2]);
+		temp.putInt(DYE_TAG_WEIGHT, this.weight_v);
+		
+		NBTUtil.setCompound(stack, DYE_TAG_GROUP, temp);
 	}
 
 	public float[] getColorComponents() {
@@ -132,5 +160,9 @@ public class WeightedDyeColor {
 	}
 	public void addColor(WeightedDyeColor weightedDyeColor) {
 		this.addColor(weightedDyeColor.getColorComponents(), weightedDyeColor.getWeight());
+	}
+	public void addColor(ItemStack stack) {
+		WeightedDyeColor temp = new WeightedDyeColor(stack);
+		this.addColor(temp);
 	}
 }
